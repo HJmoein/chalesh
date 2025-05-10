@@ -62,9 +62,16 @@
 
     .timer-container {
       font-size: 1.5em;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       color: #00ffff;
       text-shadow: 0 0 8px #00ffff;
+    }
+
+    .exact-time {
+      font-size: 1.3em;
+      color: #ffd700;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px #ffd700;
     }
 
     .back-button {
@@ -80,6 +87,10 @@
       شروع در: <span id="countdown"></span>
     </div>
 
+    <div class="exact-time">
+      ⏰ زمان دقیق شروع مسابقه: ساعت ۱۰ شب است
+    </div>
+
     <h1 class="announcement-title">چالش اطلاعات</h1>
     <h2 class="announcement-subtitle">دانش خود را محک بزنید</h2>
     <div class="announcement-details">
@@ -92,7 +103,8 @@
 
   <script>
     function updateCountdown() {
-      const targetDate = new Date('2025-06-15T00:00:00+02:00');
+      // زمان شروع: 15 ژوئن 2025 ساعت 22:00 به وقت ایران (UTC+3:30)
+      const targetDate = new Date('2025-06-15T18:30:00Z'); // معادل ساعت ۲۲:۰۰ به وقت ایران
       const now = new Date();
       const difference = targetDate.getTime() - now.getTime();
 
@@ -102,7 +114,8 @@
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        document.getElementById('countdown').innerText = `${days} روز و ${hours} ساعت و ${minutes} دقیقه و ${seconds} ثانیه`;
+        document.getElementById('countdown').innerText =
+          `${days} روز و ${hours} ساعت و ${minutes} دقیقه و ${seconds} ثانیه`;
       } else {
         document.getElementById('countdown').innerText = 'شروع شد!';
         clearInterval(countdownInterval);
