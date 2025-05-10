@@ -95,7 +95,7 @@
 <body>
 
   <div class="container">
-    <div class="timer-container">
+    <div class="timer-container" id="timer-message">
       زمان باقی‌مانده تا شروع مسابقه:
       <div class="countdown-box" id="countdown">
         <div class="time-unit"><span id="days">--</span><span class="time-label">روز</span></div>
@@ -117,7 +117,7 @@
 
   <script>
     function updateCountdown() {
-      const targetDate = new Date("2025-06-28T22:00:00+03:30"); // برابر با 1404/4/7 ساعت 22:00
+      const targetDate = new Date("2025-06-28T22:00:00+03:30");
       const now = new Date();
       const diff = targetDate - now;
 
@@ -132,8 +132,8 @@
         document.getElementById("minutes").textContent = minutes;
         document.getElementById("seconds").textContent = seconds;
       } else {
-        document.getElementById("countdown").innerHTML = "<strong>مسابقه شروع شد!</strong>";
         clearInterval(timer);
+        document.getElementById("timer-message").innerHTML = "<strong style='color: #ff4444;'>مسابقه تموم شد!</strong>";
       }
     }
 
