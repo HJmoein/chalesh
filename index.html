@@ -2,8 +2,8 @@
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
-  <title>چالش اطلاعات</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>چالش اطلاعات</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     body {
@@ -18,18 +18,13 @@
       flex-direction: column;
     }
 
-    .container, .details-page {
+    .container {
       background: rgba(0, 0, 0, 0.75);
       border-radius: 16px;
       padding: 40px;
       text-align: center;
       box-shadow: 0 0 20px #00ffff88;
       max-width: 90%;
-      display: none;
-    }
-
-    .show {
-      display: block;
     }
 
     .announcement-title {
@@ -80,72 +75,44 @@
 </head>
 <body>
 
-  <!-- صفحه اصلی -->
-  <div class="container show" id="mainPage">
+  <div class="container">
     <div class="timer-container">
       شروع در: <span id="countdown"></span>
     </div>
 
     <h1 class="announcement-title">چالش اطلاعات</h1>
-    <h2 class="announcement-subtitle">دانش خود را محک بزنید</h2>
-
+    <h2 class="announcement-subtitle">دانش خود را محک بزنید!</h2>
     <div class="announcement-details">
-      <p>به چالش اطلاعات ما بپیوندید و با دوستان خود رقابت کنید</p>
-      <p>شروع در: <strong id="start-date">۱۵ ژوئن ۲۰۲۵</strong></p>
-      <p>منتظر سوالات جذاب و هیجان‌انگیز باشید</p>
-      <p>جوایز ویژه برای نفرات برتر در نظر گرفته شده است</p>
+      <p>به چالش اطلاعات ما بپیوندید و با دوستان خود رقابت کنید.</p>
+      <p>منتظر سوالات جذاب و هیجان‌انگیز باشید.</p>
+      <p>جوایز ویژه برای نفرات برتر در نظر گرفته شده است.</p>
     </div>
-
-    <span class="call-to-action" onclick="showDetails()">توضیحات بیشتر</span>
-  </div>
-
-  <!-- صفحه توضیحات -->
-  <div class="details-page" id="detailsPage">
-    <h1>🚧 توضیحات به‌زودی اضافه می‌شود 🚧</h1>
-    <p>در حال آماده‌سازی جزئیات هیجان‌انگیز برای شما هستیم...</p>
-    <span class="call-to-action back-button" onclick="showMain()">بازگشت به صفحه اصلی</span>
+    <a href="details.html" class="call-to-action">توضیحات بیشتر</a>
   </div>
 
   <script>
     function updateCountdown() {
       const targetDate = new Date('2025-06-15T00:00:00+02:00');
       const now = new Date();
-      const diff = targetDate.getTime() - now.getTime();
+      const difference = targetDate.getTime() - now.getTime();
 
-      if (diff > 0) {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        document.getElementById('countdown').innerText =
-          `${days} روز و ${hours} ساعت و ${minutes} دقیقه و ${seconds} ثانیه`;
+        document.getElementById('countdown').innerText = `${days} روز و ${hours} ساعت و ${minutes} دقیقه و ${seconds} ثانیه`;
       } else {
         document.getElementById('countdown').innerText = 'شروع شد!';
-        document.getElementById('start-date').innerText =
-          new Intl.DateTimeFormat('fa-IR').format(new Date());
-        document.querySelector('.call-to-action').innerText = 'همین حالا شروع کنید!';
-        document.querySelector('.call-to-action').style.backgroundColor = '#00c853';
+        clearInterval(countdownInterval);
       }
     }
 
-    setInterval(updateCountdown, 1000);
+    const countdownInterval = setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    document.getElementById('start-date').innerText =
-      new Intl.DateTimeFormat('fa-IR', { year: 'numeric', month: 'numeric', day: 'numeric' })
-        .format(new Date(2025, 5, 15));
-
-    function showDetails() {
-      document.getElementById('mainPage').classList.remove('show');
-      document.getElementById('detailsPage').classList.add('show');
-    }
-
-    function showMain() {
-      document.getElementById('detailsPage').classList.remove('show');
-      document.getElementById('mainPage').classList.add('show');
-    }
   </script>
 
 </body>
 </html>
+
