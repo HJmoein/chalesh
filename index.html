@@ -105,9 +105,9 @@
       </div>
     </div>
 
-    <h1 class="announcement-title">چالش اطلاعات</h1>
-    <h2 class="announcement-subtitle">دانش خود را محک بزنید</h2>
-    <div class="announcement-details">
+    <h1 class="announcement-title" id="title">چالش اطلاعات</h1>
+    <h2 class="announcement-subtitle" id="subtitle">دانش خود را محک بزنید</h2>
+    <div class="announcement-details" id="details">
       <p>به چالش اطلاعات ما بپیوندید و با دوستان خود رقابت کنید</p>
       <p>منتظر سوالات جذاب و هیجان‌انگیز باشید</p>
       <p>جوایز ویژه برای نفرات برتر در نظر گرفته شده است</p>
@@ -117,7 +117,7 @@
 
   <script>
     function updateCountdown() {
-      const targetDate = new Date("2025-06-28T22:00:00+03:30");
+      const targetDate = new Date("2025-06-28T22:00:00+03:30"); // تاریخ مسابقه: 1404/4/7 ساعت 22:00
       const now = new Date();
       const diff = targetDate - now;
 
@@ -133,7 +133,10 @@
         document.getElementById("seconds").textContent = seconds;
       } else {
         clearInterval(timer);
-        document.getElementById("timer-message").innerHTML = "<strong style='color: #ff4444;'>مسابقه تموم شد!</strong>";
+        document.getElementById("timer-message").innerHTML = "<strong style='color: #ff4444;'>مسابقه به اتمام رسید</strong>";
+        document.getElementById("title").remove();
+        document.getElementById("subtitle").remove();
+        document.getElementById("details").remove();
       }
     }
 
@@ -143,3 +146,4 @@
 
 </body>
 </html>
+
