@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>چالش اطلاعات</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
   <style>
     body {
       margin: 0;
@@ -62,21 +62,33 @@
 
     .timer-container {
       font-size: 1.5em;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       color: #00ffff;
       text-shadow: 0 0 8px #00ffff;
     }
 
-    .exact-time {
-      font-size: 1.3em;
-      color: #ffd700;
-      margin-bottom: 20px;
-      text-shadow: 0 0 8px #ffd700;
+    .countdown-box {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
     }
 
-    .back-button {
-      margin-top: 30px;
-      display: inline-block;
+    .time-unit {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      border-radius: 10px;
+      min-width: 80px;
+    }
+
+    .time-unit span {
+      display: block;
+      font-size: 1.2em;
+    }
+
+    .time-label {
+      font-size: 0.8em;
+      margin-top: 5px;
     }
   </style>
 </head>
@@ -84,11 +96,13 @@
 
   <div class="container">
     <div class="timer-container">
-      شروع در: <span id="countdown"></span>
-    </div>
-
-    <div class="exact-time">
-      ⏰ زمان دقیق شروع مسابقه: ساعت ۱۰ شب است
+      زمان باقی‌مانده تا شروع مسابقه:
+      <div class="countdown-box" id="countdown">
+        <div class="time-unit"><span id="days">--</span><span class="time-label">روز</span></div>
+        <div class="time-unit"><span id="hours">--</span><span class="time-label">ساعت</span></div>
+        <div class="time-unit"><span id="minutes">--</span><span class="time-label">دقیقه</span></div>
+        <div class="time-unit"><span id="seconds">--</span><span class="time-label">ثانیه</span></div>
+      </div>
     </div>
 
     <h1 class="announcement-title">چالش اطلاعات</h1>
@@ -103,29 +117,29 @@
 
   <script>
     function updateCountdown() {
-      // زمان شروع: 15 ژوئن 2025 ساعت 22:00 به وقت ایران (UTC+3:30)
-      const targetDate = new Date('2025-06-15T18:30:00Z'); // معادل ساعت ۲۲:۰۰ به وقت ایران
+      const targetDate = new Date("2025-06-28T22:00:00+03:30"); // برابر با 1404/4/7 ساعت 22:00
       const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
+      const diff = targetDate - now;
 
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById('countdown').innerText =
-          `${days} روز و ${hours} ساعت و ${minutes} دقیقه و ${seconds} ثانیه`;
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
       } else {
-        document.getElementById('countdown').innerText = 'شروع شد!';
-        clearInterval(countdownInterval);
+        document.getElementById("countdown").innerHTML = "<strong>مسابقه شروع شد!</strong>";
+        clearInterval(timer);
       }
     }
 
-    const countdownInterval = setInterval(updateCountdown, 1000);
+    const timer = setInterval(updateCountdown, 1000);
     updateCountdown();
   </script>
 
 </body>
 </html>
-
